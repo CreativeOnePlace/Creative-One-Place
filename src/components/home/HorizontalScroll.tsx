@@ -12,6 +12,8 @@ const HorizontalScroll = ({ title, subtitle, children }: HorizontalScrollProps) 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isHovering, setIsHovering] = useState(false);
+  const [mouseX, setMouseX] = useState(0);
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
@@ -40,6 +42,15 @@ const HorizontalScroll = ({ title, subtitle, children }: HorizontalScrollProps) 
       container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     } else {
       container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
+  // Mouse position effect for subtle parallax
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (scrollRef.current) {
+      const { left, width } = scrollRef.current.getBoundingClientRect();
+      const x = (e.clientX - left) / width;  // 0 to 1
+      setMouseX(x);
     }
   };
 
@@ -81,16 +92,30 @@ const HorizontalScroll = ({ title, subtitle, children }: HorizontalScrollProps) 
         </div>
       </div>
       
-      <div className="relative">
+      <div 
+        className="relative" 
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+        onMouseMove={handleMouseMove}
+      >
         <div 
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto py-4 horizontal-mask custom-scrollbar px-6 md:px-12"
-          style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
+          className="flex gap-6 overflow-x-auto py-4 horizontal-mask custom-scrollbar px-6 md:px-12 transition-all duration-500"
+          style={{ 
+            scrollbarWidth: "none", 
+            WebkitOverflowScrolling: "touch",
+            transform: isHovering ? `translateY(-${mouseX * 5}px)` : "translateY(0)"
+          }}
         >
           <div className="pl-[max(1rem,calc((100vw-80rem)/2))]" />
           {children}
           <div className="pr-[max(1rem,calc((100vw-80rem)/2))]" />
         </div>
+        
+        {/* Subtle indicator bars */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-0 transition-opacity duration-300" 
+          style={{ opacity: isHovering ? 0.6 : 0 }}
+        />
       </div>
     </div>
   );

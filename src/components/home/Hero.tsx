@@ -1,10 +1,11 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../shared/Button";
 import { ChevronRight, ChevronDown } from "lucide-react";
 
 const Hero = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -21,8 +22,18 @@ const Hero = () => {
     const elements = document.querySelectorAll(".appear-animate > *");
     elements.forEach((el) => observer.observe(el));
     
+    const handleMouseMove = (event: MouseEvent) => {
+      setMousePosition({
+        x: (event.clientX / window.innerWidth) - 0.5,
+        y: (event.clientY / window.innerHeight) - 0.5,
+      });
+    };
+    
+    window.addEventListener("mousemove", handleMouseMove);
+    
     return () => {
       elements.forEach((el) => observer.unobserve(el));
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
   
@@ -31,12 +42,22 @@ const Hero = () => {
   };
   
   return (
-    <section className="relative min-h-screen flex items-center pt-20">
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background/0 z-10" />
         <div className="absolute top-0 left-0 right-0 h-[80vh] bg-gradient-to-b from-primary/5 to-transparent -z-10" />
-        <div className="absolute -top-[10vh] -left-[10vw] w-[50vw] h-[50vw] rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute -top-[5vh] -right-[10vw] w-[40vw] h-[40vw] rounded-full bg-primary/10 blur-3xl" />
+        <div 
+          className="absolute -top-[10vh] -left-[10vw] w-[50vw] h-[50vw] rounded-full bg-primary/5 blur-3xl transition-transform duration-1000 ease-out"
+          style={{ 
+            transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` 
+          }}
+        />
+        <div 
+          className="absolute -top-[5vh] -right-[10vw] w-[40vw] h-[40vw] rounded-full bg-primary/10 blur-3xl transition-transform duration-1000 ease-out"
+          style={{ 
+            transform: `translate(${mousePosition.x * -30}px, ${mousePosition.y * -20}px)` 
+          }}
+        />
       </div>
       
       <div className="container mx-auto px-6">
