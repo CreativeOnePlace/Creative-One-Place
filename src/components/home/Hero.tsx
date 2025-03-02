@@ -6,6 +6,10 @@ import { ChevronRight, ChevronDown } from "lucide-react";
 const Hero = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [cursorText, setCursorText] = useState("");
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const trailElements: HTMLDivElement[] = [];
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,17 +27,98 @@ const Hero = () => {
     elements.forEach((el) => observer.observe(el));
     
     const handleMouseMove = (event: MouseEvent) => {
+      const { clientX, clientY } = event;
+      
+      // Update normalized mouse position for parallax effects
       setMousePosition({
-        x: (event.clientX / window.innerWidth) - 0.5,
-        y: (event.clientY / window.innerHeight) - 0.5,
+        x: (clientX / window.innerWidth) - 0.5,
+        y: (clientY / window.innerHeight) - 0.5,
       });
+      
+      // Update custom cursor position
+      if (cursorRef.current) {
+        cursorRef.current.style.left = `${clientX}px`;
+        cursorRef.current.style.top = `${clientY}px`;
+      }
+      
+      // Update spotlight effect variables
+      document.documentElement.style.setProperty('--mouse-x', `${clientX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${clientY}px`);
+      
+      // Update mouse trail
+      if (trailElements.length > 0) {
+        const trail = trailElements.pop();
+        if (trail) {
+          trail.style.left = `${clientX}px`;
+          trail.style.top = `${clientY}px`;
+          trail.style.opacity = '0.8';
+          
+          setTimeout(() => {
+            trail.style.opacity = '0';
+            trailElements.unshift(trail);
+          }, 100);
+        }
+      }
     };
     
     window.addEventListener("mousemove", handleMouseMove);
     
+    // Create custom cursor elements
+    const cursorDot = document.createElement('div');
+    cursorDot.className = 'cursor-dot';
+    document.body.appendChild(cursorDot);
+    
+    const cursorOutline = document.createElement('div');
+    cursorOutline.className = 'cursor-outline';
+    document.body.appendChild(cursorOutline);
+    
+    // Create mouse trail elements
+    for (let i = 0; i < 10; i++) {
+      const trail = document.createElement('div');
+      trail.className = 'mouse-trail';
+      trail.style.opacity = '0';
+      document.body.appendChild(trail);
+      trailElements.push(trail);
+    }
+    
+    // Add custom cursor behavior
+    const handleMouseMoveCursor = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      cursorDot.style.left = `${clientX}px`;
+      cursorDot.style.top = `${clientY}px`;
+      
+      // Add delay to outline for smooth effect
+      setTimeout(() => {
+        cursorOutline.style.left = `${clientX}px`;
+        cursorOutline.style.top = `${clientY}px`;
+      }, 50);
+      
+      // Check if hovering over interactive elements
+      const target = e.target as HTMLElement;
+      if (target.closest('button') || target.closest('a') || target.closest('.interactive-element')) {
+        cursorOutline.style.width = '60px';
+        cursorOutline.style.height = '60px';
+        cursorOutline.style.opacity = '0.5';
+      } else {
+        cursorOutline.style.width = '40px';
+        cursorOutline.style.height = '40px';
+        cursorOutline.style.opacity = '1';
+      }
+    };
+    
+    document.addEventListener('mousemove', handleMouseMoveCursor);
+    
     return () => {
       elements.forEach((el) => observer.unobserve(el));
       window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener('mousemove', handleMouseMoveCursor);
+      
+      // Clean up cursor and trail elements
+      if (cursorDot) document.body.removeChild(cursorDot);
+      if (cursorOutline) document.body.removeChild(cursorOutline);
+      trailElements.forEach(trail => {
+        if (trail) document.body.removeChild(trail);
+      });
     };
   }, []);
   
@@ -42,7 +127,11 @@ const Hero = () => {
   };
   
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <section 
+      className="relative min-h-screen flex items-center pt-20 overflow-hidden spotlight"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       {/* Enhanced Background with more vibrant colors */}
       <div className="absolute inset-0 overflow-hidden -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background/0 z-10" />
@@ -80,6 +169,34 @@ const Hero = () => {
             transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * 25}px)` 
           }}
         />
+        
+        {/* Added floating particles */}
+        <div className="absolute inset-0 overflow-hidden">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div 
+              key={i}
+              className="absolute w-2 h-2 rounded-full bg-[#8B5CF6]/30 floating-animation"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${5 + Math.random() * 10}s`
+              }}
+            />
+          ))}
+          {Array.from({ length: 15 }).map((_, i) => (
+            <div 
+              key={i + 20}
+              className="absolute w-3 h-3 rounded-full bg-[#0EA5E9]/20 floating-animation"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${6 + Math.random() * 8}s`
+              }}
+            />
+          ))}
+        </div>
       </div>
       
       <div className="container mx-auto px-6">
@@ -88,7 +205,7 @@ const Hero = () => {
             Creative Design Agency
           </span>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight md:leading-tight animation-delay-400">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight md:leading-tight animation-delay-400 text-glow">
             We create <span className="text-[#8B5CF6]">brands</span> that people remember
           </h1>
           
@@ -97,10 +214,10 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animation-delay-800">
-            <Button size="lg" className="bg-[#8B5CF6] hover:bg-[#7C3AED] transition-colors" icon={<ChevronRight />}>
+            <Button size="lg" className="bg-[#8B5CF6] hover:bg-[#7C3AED] transition-colors gradient-border" icon={<ChevronRight />}>
               Explore our work
             </Button>
-            <Button variant="outline" size="lg" className="border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6]/10 transition-colors">
+            <Button variant="outline" size="lg" className="border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6]/10 transition-colors gradient-border">
               Our services
             </Button>
           </div>
@@ -118,6 +235,11 @@ const Hero = () => {
       </div>
       
       <div ref={scrollRef} />
+      
+      {/* Enhanced cursor effects display */}
+      <div ref={cursorRef} className="fixed pointer-events-none z-50 font-medium text-white text-center text-xs">
+        {cursorText}
+      </div>
     </section>
   );
 };

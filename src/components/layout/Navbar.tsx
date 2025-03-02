@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import DarkModeToggle from "../ui/DarkModeToggle";
@@ -9,6 +9,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const [hoverLink, setHoverLink] = useState<string | null>(null);
+  const navRef = useRef<HTMLElement>(null);
   
   const navLinks = [
     { name: "Home", path: "/" },
@@ -36,18 +38,44 @@ const Navbar = () => {
     setIsOpen(false);
   }, [location]);
   
+  // Add spotlight effect to navbar
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!navRef.current) return;
+      
+      const rect = navRef.current.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      
+      navRef.current.style.setProperty('--mouse-x', `${x}%`);
+      navRef.current.style.setProperty('--mouse-y', `${y}%`);
+    };
+    
+    const navElement = navRef.current;
+    if (navElement) {
+      navElement.addEventListener('mousemove', handleMouseMove);
+    }
+    
+    return () => {
+      if (navElement) {
+        navElement.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
+  }, []);
+  
   return (
     <header 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      ref={navRef}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 spotlight ${
         scrolled ? "py-3 glass-panel" : "py-6 bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         <Link 
           to="/" 
-          className="text-xl font-bold tracking-tighter relative z-10"
+          className="text-xl font-bold tracking-tighter relative z-10 interactive-element"
         >
-          <span className="text-primary transition-colors duration-300">Creative</span>
+          <span className="text-[#8B5CF6] transition-colors duration-300">Creative</span>
           <span className="text-foreground/80 transition-colors duration-300">One Place</span>
         </Link>
         
@@ -57,26 +85,31 @@ const Navbar = () => {
               <li key={link.path}>
                 <Link
                   to={link.path}
-                  className={`text-sm font-medium transition-colors hover:text-primary relative ${
+                  className={`text-sm font-medium transition-colors relative interactive-link ${
                     location.pathname === link.path
-                      ? "text-primary after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-primary"
-                      : "text-foreground/80 hover:text-foreground"
+                      ? "text-[#8B5CF6] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-[#8B5CF6]"
+                      : "text-foreground/80 hover:text-[#8B5CF6]"
                   }`}
+                  onMouseEnter={() => setHoverLink(link.path)}
+                  onMouseLeave={() => setHoverLink(null)}
                 >
                   {link.name}
+                  {hoverLink === link.path && location.pathname !== link.path && (
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#8B5CF6] origin-left scale-x-0 animate-[scale-in_0.3s_ease-out_forwards]" />
+                  )}
                 </Link>
               </li>
             ))}
           </ul>
           <DarkModeToggle />
-          <Button size="sm">Get in touch</Button>
+          <Button size="sm" className="gradient-border">Get in touch</Button>
         </nav>
         
         <div className="flex items-center gap-4 md:hidden">
           <DarkModeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-foreground hover:text-primary transition-colors"
+            className="text-foreground hover:text-[#8B5CF6] transition-colors"
             aria-label="Toggle menu"
           >
             <Menu className={`w-6 h-6 transition-opacity ${isOpen ? "opacity-0" : "opacity-100"}`} />
@@ -107,9 +140,9 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.path}
-                    className={`text-2xl font-medium block py-2 transition-colors hover:text-primary ${
+                    className={`text-2xl font-medium block py-2 transition-colors hover:text-[#8B5CF6] ${
                       location.pathname === link.path
-                        ? "text-primary"
+                        ? "text-[#8B5CF6]"
                         : "text-foreground/80"
                     }`}
                   >
@@ -124,7 +157,7 @@ const Navbar = () => {
               transition: 'all 0.3s ease-out',
               transitionDelay: '250ms' 
             }}>
-              <Button fullWidth>Get in touch</Button>
+              <Button fullWidth className="bg-[#8B5CF6] text-white">Get in touch</Button>
             </div>
           </nav>
         </div>
