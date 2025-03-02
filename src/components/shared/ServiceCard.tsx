@@ -1,5 +1,4 @@
 
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 interface ServiceCardProps {
@@ -11,12 +10,13 @@ interface ServiceCardProps {
 
 const ServiceCard = ({ title, description, icon, delay = 0 }: ServiceCardProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: delay * 0.1 }}
+    <div
       className="group relative p-6 border border-border rounded-xl bg-card/50 hover:bg-card transition-colors"
+      style={{ 
+        opacity: 1, 
+        transform: 'none',
+        transition: `opacity 0.6s ease, transform 0.6s ease${delay ? `, transition-delay: ${delay * 0.1}s` : ''}` 
+      }}
     >
       <div className="absolute -inset-px bg-gradient-to-r from-primary/20 via-primary/0 to-primary/0 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity" />
       
@@ -33,7 +33,7 @@ const ServiceCard = ({ title, description, icon, delay = 0 }: ServiceCardProps) 
           <ArrowUpRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:translate-y--1" />
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
