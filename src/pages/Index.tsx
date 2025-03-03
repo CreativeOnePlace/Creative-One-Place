@@ -10,6 +10,7 @@ import ServiceCard from "@/components/shared/ServiceCard";
 import Button from "@/components/shared/Button";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PreFooter from "@/components/layout/PreFooter";
 
 // Sample projects data
 const projects = [
@@ -307,48 +308,8 @@ const Index = () => {
           </div>
         </section>
         
-        {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] text-primary-foreground">
-          <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto text-center">
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-3xl md:text-4xl font-bold tracking-tight mb-6"
-              >
-                Ready to transform your brand?
-              </motion.h2>
-              
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-lg mb-8 text-primary-foreground/80"
-              >
-                Let's collaborate to create stunning designs and effective marketing strategies that drive results.
-              </motion.p>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
-                <Link to="/contact">
-                  <Button 
-                    size="lg" 
-                    className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-                    icon={<ArrowRight />}
-                  >
-                    Start a project
-                  </Button>
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </section>
+        {/* CTA Section - Replaced with PreFooter */}
+        <PreFooter />
       </main>
       
       <Footer />

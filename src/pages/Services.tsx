@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { PenTool, Globe, MessageCircle, BarChart, CheckCircle, ArrowUpRight, MousePointer, Navigation } from "lucide-react";
@@ -6,6 +5,7 @@ import { Link } from "react-router-dom";
 import Button from "@/components/shared/Button";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PreFooter from "@/components/layout/PreFooter";
 
 const servicesData = [
   {
@@ -103,18 +103,15 @@ const Services = () => {
     window.scrollTo(0, 0);
   }, []);
   
-  // Refs for mouse effects and process section
   const mouseCircleRef = useRef<HTMLDivElement>(null);
   const processContainerRef = useRef<HTMLDivElement>(null);
   
-  // Mouse follower effect for the process section
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!mouseCircleRef.current || !processContainerRef.current) return;
       
       const rect = processContainerRef.current.getBoundingClientRect();
       
-      // Only update when mouse is over the process section
       if (
         e.clientX >= rect.left && 
         e.clientX <= rect.right && 
@@ -135,7 +132,6 @@ const Services = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Scroll animation for process steps
   const { scrollYProgress } = useScroll({
     target: processContainerRef,
     offset: ["start end", "end end"]
@@ -146,7 +142,6 @@ const Services = () => {
       <Navbar />
       
       <main>
-        {/* Hero Section */}
         <section className="pt-32 pb-20 relative overflow-hidden">
           <div className="absolute inset-0 -z-10">
             <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
@@ -184,7 +179,6 @@ const Services = () => {
           </div>
         </section>
         
-        {/* Services Section */}
         <section className="py-20">
           <div className="container mx-auto px-6">
             <div className="space-y-32">
@@ -247,7 +241,6 @@ const Services = () => {
           </div>
         </section>
         
-        {/* Our Process Section */}
         <section ref={processContainerRef} className="py-20 bg-gradient-to-r from-[#8B5CF6]/10 via-[#D946EF]/5 to-[#8B5CF6]/10 relative overflow-hidden">
           <div 
             ref={mouseCircleRef}
@@ -288,7 +281,6 @@ const Services = () => {
             </div>
             
             <div className="relative pb-6">
-              {/* Timeline vertical line */}
               <motion.div 
                 className="absolute top-0 bottom-0 left-[3.05rem] w-1 bg-gradient-to-b from-[#8B5CF6] via-[#D946EF] to-[#0EA5E9] rounded-full hidden md:block"
                 style={{
@@ -298,7 +290,6 @@ const Services = () => {
               
               <div className="space-y-16 md:space-y-24 relative">
                 {processSteps.map((step, index) => {
-                  // Calculate the progress value for this specific step
                   const stepProgress = useTransform(
                     scrollYProgress,
                     [index * 0.2, index * 0.2 + 0.2],
@@ -344,65 +335,7 @@ const Services = () => {
           </div>
         </section>
         
-        {/* CTA Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-6">
-            <div className="rounded-2xl bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] text-primary-foreground p-8 md:p-12 relative overflow-hidden">
-              <div className="absolute inset-0 -z-10">
-                <div className="absolute inset-0 bg-grid opacity-30" />
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/10 to-transparent" />
-                <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-white/5 to-transparent" />
-              </div>
-              
-              <div className="max-w-3xl mx-auto text-center">
-                <motion.h2 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="text-3xl md:text-4xl font-bold tracking-tight mb-6"
-                >
-                  Ready to start your project?
-                </motion.h2>
-                
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="text-lg mb-8 text-primary-foreground/80"
-                >
-                  Let's discuss how our services can help you achieve your business goals.
-                </motion.p>
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="flex flex-col sm:flex-row items-center justify-center gap-4"
-                >
-                  <Link to="/contact">
-                    <Button 
-                      size="lg" 
-                      className="bg-white text-primary hover:bg-white/90"
-                    >
-                      Contact us
-                    </Button>
-                  </Link>
-                  <Link to="/work">
-                    <Button 
-                      variant="outline" 
-                      size="lg" 
-                      className="border-white text-white hover:bg-white/10"
-                    >
-                      View our work
-                    </Button>
-                  </Link>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <PreFooter />
       </main>
       
       <Footer />

@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PreFooter from "@/components/layout/PreFooter";
 
 // Sample projects data
 const projectsData = [
@@ -214,43 +214,8 @@ const Work = () => {
           </div>
         </section>
         
-        {/* CTA Section */}
-        <section className="py-20">
-          <div className="container mx-auto px-6">
-            <div className="bg-secondary rounded-2xl p-8 md:p-12">
-              <div className="max-w-3xl mx-auto text-center">
-                <motion.h2 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="text-3xl font-bold tracking-tight mb-6"
-                >
-                  Have a project in mind?
-                </motion.h2>
-                
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="text-lg mb-8 text-muted-foreground"
-                >
-                  We'd love to hear about your project and explore how we can help bring your vision to life.
-                </motion.p>
-                
-                <motion.button
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="px-8 py-3 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-colors"
-                >
-                  Get in touch
-                </motion.button>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* CTA Section - Replaced with PreFooter */}
+        <PreFooter />
       </main>
       
       <Footer />
