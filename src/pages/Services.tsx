@@ -1,7 +1,8 @@
 
-import { useEffect } from "react";
-import { motion } from "framer-motion";
-import { PenTool, Globe, MessageCircle, BarChart, CheckCircle, ArrowUpRight } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { PenTool, Globe, MessageCircle, BarChart, CheckCircle, ArrowUpRight, MousePointer, Navigation } from "lucide-react";
+import { Link } from "react-router-dom";
 import Button from "@/components/shared/Button";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -101,6 +102,44 @@ const Services = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
+  // Refs for mouse effects and process section
+  const mouseCircleRef = useRef<HTMLDivElement>(null);
+  const processContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Mouse follower effect for the process section
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!mouseCircleRef.current || !processContainerRef.current) return;
+      
+      const rect = processContainerRef.current.getBoundingClientRect();
+      
+      // Only update when mouse is over the process section
+      if (
+        e.clientX >= rect.left && 
+        e.clientX <= rect.right && 
+        e.clientY >= rect.top && 
+        e.clientY <= rect.bottom
+      ) {
+        const relativeX = e.clientX - rect.left;
+        const relativeY = e.clientY - rect.top;
+        
+        mouseCircleRef.current.style.opacity = "0.15";
+        mouseCircleRef.current.style.transform = `translate(${relativeX}px, ${relativeY}px)`;
+      } else {
+        mouseCircleRef.current.style.opacity = "0";
+      }
+    };
+    
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  // Scroll animation for process steps
+  const { scrollYProgress } = useScroll({
+    target: processContainerRef,
+    offset: ["start end", "end end"]
+  });
   
   return (
     <div className="min-h-screen">
@@ -209,7 +248,13 @@ const Services = () => {
         </section>
         
         {/* Our Process Section */}
-        <section className="py-20 bg-secondary/50">
+        <section ref={processContainerRef} className="py-20 bg-gradient-to-r from-[#8B5CF6]/10 via-[#D946EF]/5 to-[#8B5CF6]/10 relative overflow-hidden">
+          <div 
+            ref={mouseCircleRef}
+            className="absolute w-[300px] h-[300px] rounded-full bg-[#D946EF] opacity-0 blur-[80px] pointer-events-none transition-opacity duration-300 ease-out"
+            style={{ transform: 'translate(-50%, -50%)' }}
+          />
+          
           <div className="container mx-auto px-6">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <motion.span 
@@ -226,7 +271,7 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+                className="text-3xl md:text-4xl font-bold tracking-tight mb-4 background-animate bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316]"
               >
                 How we bring your vision to life
               </motion.h2>
@@ -242,30 +287,58 @@ const Services = () => {
               </motion.p>
             </div>
             
-            <div className="relative">
-              <div className="absolute top-0 bottom-0 left-[3.05rem] w-px bg-border hidden md:block" />
+            <div className="relative pb-6">
+              {/* Timeline vertical line */}
+              <motion.div 
+                className="absolute top-0 bottom-0 left-[3.05rem] w-1 bg-gradient-to-b from-[#8B5CF6] via-[#D946EF] to-[#0EA5E9] rounded-full hidden md:block"
+                style={{
+                  scaleY: scrollYProgress
+                }}
+              />
               
-              <div className="space-y-12">
-                {processSteps.map((step, index) => (
-                  <motion.div 
-                    key={step.number}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="md:grid md:grid-cols-7 items-start gap-6"
-                  >
-                    <div className="flex items-center gap-4 md:gap-0 md:block md:col-span-2">
-                      <div className="relative z-10 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
-                        {step.number}
-                      </div>
-                      <h3 className="text-xl font-medium md:mt-2">{step.title}</h3>
-                    </div>
-                    <div className="mt-4 md:mt-0 pl-14 md:pl-0 md:col-span-5">
-                      <p className="text-muted-foreground">{step.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
+              <div className="space-y-16 md:space-y-24 relative">
+                {processSteps.map((step, index) => {
+                  // Calculate the progress value for this specific step
+                  const stepProgress = useTransform(
+                    scrollYProgress,
+                    [index * 0.2, index * 0.2 + 0.2],
+                    [0, 1]
+                  );
+                  
+                  return (
+                    <motion.div 
+                      key={step.number}
+                      className="md:grid md:grid-cols-7 items-start gap-6"
+                      viewport={{ once: true, margin: "-100px" }}
+                    >
+                      <motion.div 
+                        className="flex items-center gap-4 md:gap-0 md:block md:col-span-2"
+                        style={{
+                          opacity: stepProgress,
+                          y: useTransform(stepProgress, [0, 1], [50, 0])
+                        }}
+                      >
+                        <div className="relative z-10 w-10 h-10 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-primary-foreground flex items-center justify-center font-bold group-hover:shadow-lg transition-all duration-300">
+                          {step.number}
+                          <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-ping-slow" />
+                        </div>
+                        <h3 className="text-xl font-medium md:mt-2 group-hover:text-[#D946EF] transition-colors duration-300">{step.title}</h3>
+                      </motion.div>
+                      
+                      <motion.div 
+                        className="mt-4 md:mt-0 pl-14 md:pl-0 md:col-span-5 group cursor-default"
+                        style={{
+                          opacity: stepProgress,
+                          x: useTransform(stepProgress, [0, 1], [50, 0])
+                        }}
+                      >
+                        <div className="p-6 rounded-xl backdrop-blur-sm bg-white/5 border border-white/10 shadow-xl transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-[#D946EF]/20 group-hover:border-[#D946EF]/20">
+                          <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{step.description}</p>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -274,8 +347,9 @@ const Services = () => {
         {/* CTA Section */}
         <section className="py-20">
           <div className="container mx-auto px-6">
-            <div className="rounded-2xl bg-primary text-primary-foreground p-8 md:p-12 relative overflow-hidden">
+            <div className="rounded-2xl bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] text-primary-foreground p-8 md:p-12 relative overflow-hidden">
               <div className="absolute inset-0 -z-10">
+                <div className="absolute inset-0 bg-grid opacity-30" />
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/10 to-transparent" />
                 <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-white/5 to-transparent" />
               </div>
@@ -307,19 +381,23 @@ const Services = () => {
                   transition={{ delay: 0.2 }}
                   className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
-                  <Button 
-                    size="lg" 
-                    className="bg-white text-primary hover:bg-white/90"
-                  >
-                    Contact us
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
-                    className="border-white text-white hover:bg-white/10"
-                  >
-                    View our work
-                  </Button>
+                  <Link to="/contact">
+                    <Button 
+                      size="lg" 
+                      className="bg-white text-primary hover:bg-white/90"
+                    >
+                      Contact us
+                    </Button>
+                  </Link>
+                  <Link to="/work">
+                    <Button 
+                      variant="outline" 
+                      size="lg" 
+                      className="border-white text-white hover:bg-white/10"
+                    >
+                      View our work
+                    </Button>
+                  </Link>
                 </motion.div>
               </div>
             </div>

@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -64,22 +63,26 @@ const services = [
   {
     title: "Graphic Design",
     description: "Create stunning visuals with our expert graphic design services, from branding to marketing materials.",
-    icon: <PenTool className="w-6 h-6" />
+    icon: <PenTool className="w-6 h-6" />,
+    link: "/services#graphic-design"
   },
   {
     title: "Web Design",
     description: "Build responsive, user-friendly websites that drive engagement and conversions.",
-    icon: <Globe className="w-6 h-6" />
+    icon: <Globe className="w-6 h-6" />,
+    link: "/services#web-design"
   },
   {
     title: "Social Media",
     description: "Develop a powerful social media presence with strategic content creation and management.",
-    icon: <MessageCircle className="w-6 h-6" />
+    icon: <MessageCircle className="w-6 h-6" />,
+    link: "/services#social-media"
   },
   {
     title: "Marketing",
     description: "Drive business growth with comprehensive marketing strategies tailored to your goals.",
-    icon: <BarChart className="w-6 h-6" />
+    icon: <BarChart className="w-6 h-6" />,
+    link: "/services#marketing"
   }
 ];
 
@@ -130,7 +133,7 @@ const Index = () => {
         </section>
         
         {/* Services Section */}
-        <section className="py-20 bg-secondary/50">
+        <section className="py-20 bg-gradient-to-r from-[#8B5CF6]/10 via-[#D946EF]/5 to-[#8B5CF6]/10">
           <div className="container mx-auto px-6">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <motion.span 
@@ -147,7 +150,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+                className="text-3xl md:text-4xl font-bold tracking-tight mb-4 background-animate bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316]"
               >
                 Comprehensive creative solutions for your brand
               </motion.h2>
@@ -171,6 +174,7 @@ const Index = () => {
                   description={service.description}
                   icon={service.icon}
                   delay={index}
+                  link={service.link}
                 />
               ))}
             </div>
@@ -302,7 +306,7 @@ const Index = () => {
         </section>
         
         {/* CTA Section */}
-        <section className="py-20 bg-primary text-primary-foreground">
+        <section className="py-20 bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] text-primary-foreground">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <motion.h2 
@@ -330,13 +334,15 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                <Button 
-                  size="lg" 
-                  className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-                  icon={<ArrowRight />}
-                >
-                  Start a project
-                </Button>
+                <Link to="/contact">
+                  <Button 
+                    size="lg" 
+                    className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                    icon={<ArrowRight />}
+                  >
+                    Start a project
+                  </Button>
+                </Link>
               </motion.div>
             </div>
           </div>

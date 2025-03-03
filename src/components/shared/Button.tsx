@@ -22,8 +22,9 @@ const Button = ({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [particlesArray, setParticlesArray] = useState<{id: number, x: number, y: number, size: number, color: string}[]>([]);
   
-  // Magnetic button effect
+  // Magnetic button effect with enhanced strength
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!buttonRef.current) return;
     
@@ -37,17 +38,53 @@ const Button = ({
     const normalizedDistance = Math.min(distance / maxDistance, 1);
     
     // Scale down the movement as we get further from center
-    const magnetStrength = 25 * (1 - normalizedDistance);
+    // Increased magnetStrength from 25 to 40 for more pronounced effect
+    const magnetStrength = 40 * (1 - normalizedDistance);
     
     setPosition({
       x: x * magnetStrength / 100,
       y: y * magnetStrength / 100
     });
+    
+    // Create particles on hover when moving
+    if (Math.random() > 0.7) {
+      createParticle(e.clientX - rect.left, e.clientY - rect.top);
+    }
   };
+  
+  // Create a particle at the given position
+  const createParticle = (x: number, y: number) => {
+    // Get vibrant colors from our palette
+    const colors = ['#8B5CF6', '#D946EF', '#F97316', '#0EA5E9'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    
+    setParticlesArray(prev => [
+      ...prev, 
+      {
+        id: Date.now() + Math.random(),
+        x,
+        y,
+        size: Math.random() * 6 + 2,
+        color: randomColor
+      }
+    ]);
+  };
+  
+  // Update particles positions and remove old ones
+  useEffect(() => {
+    if (particlesArray.length === 0) return;
+    
+    const timeout = setTimeout(() => {
+      setParticlesArray(prev => prev.slice(1));
+    }, 500);
+    
+    return () => clearTimeout(timeout);
+  }, [particlesArray]);
   
   const handleMouseLeave = () => {
     setPosition({ x: 0, y: 0 });
     setIsHovering(false);
+    setParticlesArray([]);
   };
   
   const baseStyles = "relative inline-flex items-center justify-center font-medium transition-all duration-300 ease-out rounded-md overflow-hidden";
@@ -84,6 +121,22 @@ const Button = ({
       }}
       {...props}
     >
+      {/* Particles effect */}
+      {particlesArray.map(particle => (
+        <span
+          key={particle.id}
+          className="absolute rounded-full pointer-events-none animate-float-away"
+          style={{
+            left: particle.x,
+            top: particle.y,
+            width: particle.size,
+            height: particle.size,
+            backgroundColor: particle.color,
+            opacity: 0.7
+          }}
+        />
+      ))}
+      
       <span className="relative z-10 flex items-center gap-2">
         {icon && <span className="transition-transform duration-300 group-hover:translate-x-0.5">{icon}</span>}
         {children}
