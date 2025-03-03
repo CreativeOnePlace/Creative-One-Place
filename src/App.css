@@ -1,4 +1,3 @@
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -278,4 +277,110 @@
 @keyframes AnimateGradient {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+/* Custom Animated Text for "Creative One Place" */
+.animated-text-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animated-text-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animated-text-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background: rgba(139, 92, 246, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.animated-text {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  z-index: 1;
+  position: relative;
+}
+
+.animated-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px) rotate(10deg);
+  animation: letter-appear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  background: linear-gradient(90deg, #9b87f5, #D6BCFA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 5px rgba(155, 135, 245, 0.3);
+  padding: 0 1px;
+  transition: all 0.3s ease;
+}
+
+.animated-letter:hover {
+  transform: translateY(-5px) scale(1.2);
+  filter: brightness(1.2);
+}
+
+.moving-gradient {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: gradient-move 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes letter-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) rotate(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes gradient-move {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Add responsive styles for the animated text */
+@media (max-width: 768px) {
+  .animated-text {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .animated-text {
+    font-size: 1.5rem;
+  }
 }
