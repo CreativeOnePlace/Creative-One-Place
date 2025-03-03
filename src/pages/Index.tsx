@@ -309,7 +309,10 @@ const Index = () => {
         </section>
         
         {/* CTA Section - Replaced with PreFooter */}
-        <PreFooter />
+        <PreFooter 
+          title="Ready to transform your brand?" 
+          description="Let's collaborate to create stunning designs and effective marketing strategies that drive results."
+        />
       </main>
       
       <Footer />

@@ -335,7 +335,10 @@ const Services = () => {
           </div>
         </section>
         
-        <PreFooter />
+        <PreFooter 
+          title="Need our creative expertise?" 
+          description="Discover how our tailored services can elevate your brand and help you achieve your business goals."
+        />
       </main>
       
       <Footer />

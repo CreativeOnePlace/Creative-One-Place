@@ -215,7 +215,10 @@ const Work = () => {
         </section>
         
         {/* CTA Section - Replaced with PreFooter */}
-        <PreFooter />
+        <PreFooter 
+          title="Have a project in mind?" 
+          description="Turn your vision into reality with our expert team of designers and strategists ready to bring your ideas to life."
+        />
       </main>
       
       <Footer />
