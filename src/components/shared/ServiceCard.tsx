@@ -1,6 +1,6 @@
 
 import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface ServiceCardProps {
   title: string;
@@ -11,6 +11,32 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ title, description, icon, delay = 0, link = "#" }: ServiceCardProps) => {
+  const navigate = useNavigate();
+
+  // Handle click to navigate to specific sections
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    // Check if the link includes a hash for section navigation
+    if (link.includes('#')) {
+      const [path, hash] = link.split('#');
+      
+      // Navigate to the page
+      navigate(path);
+      
+      // After navigation, scroll to the element
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Regular navigation without hash
+      navigate(link);
+    }
+  };
+
   return (
     <div
       className="group relative p-6 border border-border rounded-xl bg-card/50 hover:bg-card transition-colors"
@@ -30,10 +56,14 @@ const ServiceCard = ({ title, description, icon, delay = 0, link = "#" }: Servic
         <h3 className="text-xl font-medium mb-2">{title}</h3>
         <p className="text-muted-foreground text-sm mb-6 flex-grow">{description}</p>
         
-        <Link to={link} className="flex items-center text-sm font-medium mt-auto group/link">
+        <a 
+          href={link} 
+          onClick={handleClick}
+          className="flex items-center text-sm font-medium mt-auto group/link cursor-pointer"
+        >
           <span>Learn more</span>
           <ArrowUpRight className="ml-1 w-4 h-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
-        </Link>
+        </a>
       </div>
     </div>
   );

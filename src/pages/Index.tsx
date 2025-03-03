@@ -283,7 +283,9 @@ const Index = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 }}
                 >
-                  <Button size="lg">Get in touch</Button>
+                  <Link to="/contact">
+                    <Button size="lg">Get in touch</Button>
+                  </Link>
                 </motion.div>
               </div>
               
