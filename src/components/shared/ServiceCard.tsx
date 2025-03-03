@@ -1,14 +1,16 @@
 
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface ServiceCardProps {
   title: string;
   description: string;
   icon: React.ReactNode;
   delay?: number;
+  link?: string;
 }
 
-const ServiceCard = ({ title, description, icon, delay = 0 }: ServiceCardProps) => {
+const ServiceCard = ({ title, description, icon, delay = 0, link = "#" }: ServiceCardProps) => {
   return (
     <div
       className="group relative p-6 border border-border rounded-xl bg-card/50 hover:bg-card transition-colors"
@@ -28,10 +30,10 @@ const ServiceCard = ({ title, description, icon, delay = 0 }: ServiceCardProps) 
         <h3 className="text-xl font-medium mb-2">{title}</h3>
         <p className="text-muted-foreground text-sm mb-6 flex-grow">{description}</p>
         
-        <div className="flex items-center text-sm font-medium mt-auto">
+        <Link to={link} className="flex items-center text-sm font-medium mt-auto group/link">
           <span>Learn more</span>
-          <ArrowUpRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:translate-y--1" />
-        </div>
+          <ArrowUpRight className="ml-1 w-4 h-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
+        </Link>
       </div>
     </div>
   );
