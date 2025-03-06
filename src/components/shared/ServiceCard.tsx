@@ -45,23 +45,21 @@ const ServiceCard = ({ title, description, icon, delay = 0, link = "#" }: Servic
       transition={{ duration: 0.6, delay: delay * 0.1 }}
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -8 }}
-      className="group relative overflow-hidden rounded-2xl"
+      className="group relative overflow-hidden rounded-2xl border border-[#8B5CF6]/20 bg-card/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-[#8B5CF6]/10 to-[#D946EF]/5 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#8B5CF6]/5 to-[#D946EF]/5 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
       
-      <div className="absolute inset-0 bg-white/50 dark:bg-black/50 backdrop-blur-sm opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+      {/* Glowing border effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500" />
       
-      <div className="relative z-10 p-6 border border-[#8B5CF6]/20 rounded-2xl bg-card/80 backdrop-blur-sm hover:shadow-xl hover:shadow-[#8B5CF6]/5 transition-all duration-300 h-full flex flex-col">
-        <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500" />
-        
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#8B5CF6]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-2xl" />
-        
+      {/* Card content */}
+      <div className="relative z-10 p-6 flex flex-col h-full">
         <motion.div 
-          className="w-14 h-14 flex items-center justify-center rounded-xl border border-[#8B5CF6]/30 text-[#8B5CF6] backdrop-blur-md bg-white/10 group-hover:bg-[#8B5CF6] group-hover:text-white transition-all duration-300 mb-5 relative overflow-hidden"
+          className="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#8B5CF6]/10 to-[#D946EF]/10 border border-[#8B5CF6]/30 text-[#8B5CF6] mb-5 relative overflow-hidden group-hover:border-[#8B5CF6]/50 transition-colors duration-300"
           whileHover={{ scale: 1.05, rotate: 5 }}
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-[#8B5CF6] to-[#D946EF] opacity-0 group-hover:opacity-100 transition-all duration-500" />
-          <div className="relative z-10">
+          <div className="relative z-10 group-hover:text-white transition-colors duration-300">
             {icon}
           </div>
         </motion.div>
