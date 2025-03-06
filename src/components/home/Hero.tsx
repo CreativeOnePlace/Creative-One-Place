@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import Button from "../shared/Button";
 import { ChevronRight, ChevronDown } from "lucide-react";
@@ -11,12 +10,27 @@ const Hero = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const trailElements: HTMLDivElement[] = [];
   const [isVisible, setIsVisible] = useState(false);
+  const [typedText, setTypedText] = useState("");
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const fullText = "We create brands that people remember";
   
   useEffect(() => {
     // Set the animated text to visible after a short delay for entrance effect
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 500);
+    
+    // Typewriter effect for the headline
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setTypedText(fullText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+        setIsTypingComplete(true);
+      }
+    }, 100);
     
     const observer = new IntersectionObserver(
       (entries) => {
@@ -119,6 +133,7 @@ const Hero = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener('mousemove', handleMouseMoveCursor);
       clearTimeout(timer);
+      clearInterval(typingInterval);
       
       // Clean up cursor and trail elements
       if (cursorDot) document.body.removeChild(cursorDot);
@@ -207,40 +222,14 @@ const Hero = () => {
       </div>
       
       <div className="container mx-auto px-6">
-        {/* Animated "Creative One Place" text */}
-        <div className={`animated-text-container mb-12 ${isVisible ? 'visible' : ''}`}>
-          <div className="animated-text-wrapper">
-            <h1 className="animated-text">
-              <span className="animated-letter" style={{animationDelay: "0.1s"}}>C</span>
-              <span className="animated-letter" style={{animationDelay: "0.2s"}}>r</span>
-              <span className="animated-letter" style={{animationDelay: "0.3s"}}>e</span>
-              <span className="animated-letter" style={{animationDelay: "0.4s"}}>a</span>
-              <span className="animated-letter" style={{animationDelay: "0.5s"}}>t</span>
-              <span className="animated-letter" style={{animationDelay: "0.6s"}}>i</span>
-              <span className="animated-letter" style={{animationDelay: "0.7s"}}>v</span>
-              <span className="animated-letter" style={{animationDelay: "0.8s"}}>e</span>
-              <span className="animated-letter" style={{animationDelay: "0.95s"}}></span>
-              <span className="animated-letter" style={{animationDelay: "1.0s"}}>O</span>
-              <span className="animated-letter" style={{animationDelay: "1.1s"}}>n</span>
-              <span className="animated-letter" style={{animationDelay: "1.2s"}}>e</span>
-              <span className="animated-letter" style={{animationDelay: "1.35s"}}></span>
-              <span className="animated-letter" style={{animationDelay: "1.4s"}}>P</span>
-              <span className="animated-letter" style={{animationDelay: "1.5s"}}>l</span>
-              <span className="animated-letter" style={{animationDelay: "1.6s"}}>a</span>
-              <span className="animated-letter" style={{animationDelay: "1.7s"}}>c</span>
-              <span className="animated-letter" style={{animationDelay: "1.8s"}}>e</span>
-            </h1>
-            <div className="moving-gradient"></div>
-          </div>
-        </div>
-        
         <div className="max-w-4xl mx-auto text-center space-y-8 appear-animate">
           <span className="inline-block py-1 px-3 bg-[#8B5CF6]/20 text-[#8B5CF6] rounded-full text-sm font-medium animation-delay-200">
             Creative Design Agency
           </span>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight md:leading-tight animation-delay-400 text-glow">
-            We create <span className="text-[#8B5CF6]">brands</span> that people remember
+            <span className="typewriter-text">{typedText}</span>
+            <span className={`typewriter-cursor ${isTypingComplete ? 'typewriter-cursor-blink' : ''}`}>|</span>
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animation-delay-600">

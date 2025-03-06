@@ -384,3 +384,25 @@
     font-size: 1.5rem;
   }
 }
+
+/* Typewriter effect */
+.typewriter-text {
+  display: inline;
+  color: #8B5CF6;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: #8B5CF6;
+  font-weight: bold;
+}
+
+.typewriter-cursor-blink {
+  animation: typewriter-cursor-blink 1s infinite;
+}
+
+@keyframes typewriter-cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
