@@ -385,7 +385,7 @@
   }
 }
 
-/* Typewriter effect */
+/* Typewriter effect - no longer needed, replaced with matching effect */
 .typewriter-text {
   display: inline;
   color: #8B5CF6;
@@ -406,3 +406,83 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+
+/* New matching text animation */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Updated service card animations */
+.service-card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgb(139 92 246 / 0.1), 0 8px 10px -6px rgb(139 92 246 / 0.1);
+}
+
+/* Timeline animations */
+.timeline-dot {
+  position: relative;
+}
+
+.timeline-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background-color: rgba(139, 92, 246, 0.2);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  animation: pulse-dot 2.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.3;
+  }
+}
+
+/* Staggered animation for timeline elements */
+@keyframes fade-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.staggered-animate > * {
+  opacity: 0;
+  animation: fade-slide-up 0.6s ease forwards;
+}
+
+.staggered-animate > *:nth-child(1) { animation-delay: 0.1s; }
+.staggered-animate > *:nth-child(2) { animation-delay: 0.2s; }
+.staggered-animate > *:nth-child(3) { animation-delay: 0.3s; }
+.staggered-animate > *:nth-child(4) { animation-delay: 0.4s; }
+.staggered-animate > *:nth-child(5) { animation-delay: 0.5s; }

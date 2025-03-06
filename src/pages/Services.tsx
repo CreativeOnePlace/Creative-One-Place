@@ -6,6 +6,7 @@ import Button from "@/components/shared/Button";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PreFooter from "@/components/layout/PreFooter";
+import ServiceCard from "@/components/shared/ServiceCard";
 
 const servicesData = [
   {
@@ -280,56 +281,75 @@ const Services = () => {
               </motion.p>
             </div>
             
-            <div className="relative pb-6">
+            <div className="relative py-10">
               <motion.div 
-                className="absolute top-0 bottom-0 left-[3.05rem] w-1 bg-gradient-to-b from-[#8B5CF6] via-[#D946EF] to-[#0EA5E9] rounded-full hidden md:block"
+                className="absolute top-0 bottom-0 left-1/2 w-1 bg-gradient-to-b from-[#8B5CF6] via-[#D946EF] to-[#0EA5E9] rounded-full hidden md:block"
                 style={{
-                  scaleY: scrollYProgress
+                  scaleY: scrollYProgress,
+                  transformOrigin: "top"
                 }}
               />
               
-              <div className="space-y-16 md:space-y-24 relative">
-                {processSteps.map((step, index) => {
-                  const stepProgress = useTransform(
-                    scrollYProgress,
-                    [index * 0.2, index * 0.2 + 0.2],
-                    [0, 1]
-                  );
-                  
-                  return (
+              <div className="space-y-24 relative">
+                {processSteps.map((step, index) => (
+                  <div key={step.number} className="relative">
                     <motion.div 
-                      key={step.number}
-                      className="md:grid md:grid-cols-7 items-start gap-6"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
                       viewport={{ once: true, margin: "-100px" }}
+                      transition={{ delay: index * 0.1 }}
+                      className={`flex md:items-center ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} flex-col`}
                     >
                       <motion.div 
-                        className="flex items-center gap-4 md:gap-0 md:block md:col-span-2"
-                        style={{
-                          opacity: stepProgress,
-                          y: useTransform(stepProgress, [0, 1], [50, 0])
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ 
+                          delay: index * 0.1 + 0.3,
+                          type: "spring",
+                          stiffness: 200,
+                          damping: 10
                         }}
+                        className="absolute left-1/2 md:translate-x-[-50%] w-6 h-6 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] z-10 hidden md:block"
                       >
-                        <div className="relative z-10 w-10 h-10 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-primary-foreground flex items-center justify-center font-bold group-hover:shadow-lg transition-all duration-300">
-                          {step.number}
-                          <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-ping-slow" />
-                        </div>
-                        <h3 className="text-xl font-medium md:mt-2 group-hover:text-[#D946EF] transition-colors duration-300">{step.title}</h3>
+                        <span className="absolute inset-0 rounded-full bg-white/20 animate-ping-slow"></span>
                       </motion.div>
                       
                       <motion.div 
-                        className="mt-4 md:mt-0 pl-14 md:pl-0 md:col-span-5 group cursor-default"
-                        style={{
-                          opacity: stepProgress,
-                          x: useTransform(stepProgress, [0, 1], [50, 0])
-                        }}
+                        initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ delay: index * 0.1 + 0.1 }}
+                        className={`md:w-1/2 ${index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"} mb-4 md:mb-0`}
                       >
-                        <div className="p-6 rounded-xl backdrop-blur-sm bg-white/5 border border-white/10 shadow-xl transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-[#D946EF]/20 group-hover:border-[#D946EF]/20">
-                          <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{step.description}</p>
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 text-[#8B5CF6] font-bold text-xl md:hidden mb-4">
+                          {step.number}
                         </div>
+                        <div className="hidden md:block">
+                          <span className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-[#8B5CF6] to-[#D946EF]">
+                            {step.number}
+                          </span>
+                        </div>
+                        <h3 className="text-2xl font-semibold mt-2 text-foreground">{step.title}</h3>
+                      </motion.div>
+                      
+                      <motion.div 
+                        initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ delay: index * 0.1 + 0.2 }}
+                        className={`md:w-1/2 ${index % 2 === 0 ? "md:pl-12" : "md:pr-12 md:text-right"}`}
+                      >
+                        <motion.div 
+                          whileHover={{ scale: 1.02 }}
+                          className="p-6 rounded-xl backdrop-blur-sm bg-white/5 border border-white/10 shadow-xl"
+                        >
+                          <p className="text-muted-foreground">{step.description}</p>
+                        </motion.div>
                       </motion.div>
                     </motion.div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             </div>
           </div>

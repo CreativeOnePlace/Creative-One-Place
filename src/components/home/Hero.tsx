@@ -10,8 +10,7 @@ const Hero = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const trailElements: HTMLDivElement[] = [];
   const [isVisible, setIsVisible] = useState(false);
-  const [typedText, setTypedText] = useState("");
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [animatedText, setAnimatedText] = useState<string[]>([]);
   const fullText = "We create brands that people remember";
   
   useEffect(() => {
@@ -20,17 +19,18 @@ const Hero = () => {
       setIsVisible(true);
     }, 500);
     
-    // Typewriter effect for the headline
-    let currentIndex = 0;
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setTypedText(fullText.slice(0, currentIndex));
-        currentIndex++;
+    // Matching text effect - all characters appear with staggered timing
+    const textArray = fullText.split('');
+    let animationArray: string[] = [];
+    
+    const animationInterval = setInterval(() => {
+      if (animationArray.length < textArray.length) {
+        animationArray = [...textArray.slice(0, animationArray.length + 1)];
+        setAnimatedText(animationArray);
       } else {
-        clearInterval(typingInterval);
-        setIsTypingComplete(true);
+        clearInterval(animationInterval);
       }
-    }, 100);
+    }, 80);
     
     const observer = new IntersectionObserver(
       (entries) => {
@@ -133,7 +133,7 @@ const Hero = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener('mousemove', handleMouseMoveCursor);
       clearTimeout(timer);
-      clearInterval(typingInterval);
+      clearInterval(animationInterval);
       
       // Clean up cursor and trail elements
       if (cursorDot) document.body.removeChild(cursorDot);
@@ -228,8 +228,24 @@ const Hero = () => {
           </span>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight md:leading-tight animation-delay-400 text-glow">
-            <span className="typewriter-text">{typedText}</span>
-            <span className={`typewriter-cursor ${isTypingComplete ? 'typewriter-cursor-blink' : ''}`}>|</span>
+            {animatedText.map((letter, index) => (
+              <span 
+                key={index} 
+                className="inline-block transition-all duration-300"
+                style={{ 
+                  animationDelay: `${index * 0.05}s`,
+                  opacity: 0,
+                  transform: 'translateY(20px)',
+                  animation: `fade-in 0.5s ease-out forwards ${index * 0.05}s`
+                }}
+              >
+                {index === 3 || index === 10 ? (
+                  <span className="text-[#8B5CF6]">{letter}</span>
+                ) : (
+                  letter
+                )}
+              </span>
+            ))}
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animation-delay-600">
