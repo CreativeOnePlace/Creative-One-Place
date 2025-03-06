@@ -17,31 +17,16 @@ const HeroContent = ({ animatedText, fullText }: HeroContentProps) => {
         </span>
         
         <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight md:leading-tight animation-delay-400 text-glow">
-          {animatedText.map((letter, index) => (
-            <span 
-              key={index} 
-              className="inline-block transition-all duration-300"
-              style={{ 
-                animationDelay: `${index * 0.05}s`,
-                opacity: 0,
-                transform: 'translateY(20px)',
-                animation: `fade-in 0.5s ease-out forwards ${index * 0.05}s`
-              }}
-            >
-              {index === 3 || index === 10 ? (
-                <span className="text-[#8B5CF6]">{letter}</span>
-              ) : (
-                letter
-              )}
-            </span>
-          ))}
+          <span className="animate-fade-in opacity-0" style={{ animationDelay: "0.4s" }}>
+            We <span className="text-[#8B5CF6]">create</span> brands that <span className="text-[#8B5CF6]">people</span> remember
+          </span>
         </h1>
         
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animation-delay-600">
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animation-delay-600 animate-fade-in opacity-0" style={{ animationDelay: "0.6s" }}>
           We create brands that people remember, offering graphic design, web design, social media marketing, and brand strategy solutions.
         </p>
         
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animation-delay-800">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animation-delay-800 animate-fade-in opacity-0" style={{ animationDelay: "0.8s" }}>
           <Button size="lg" className="bg-[#8B5CF6] hover:bg-[#7C3AED] transition-colors gradient-border" icon={<ChevronRight />}>
             Explore our work
           </Button>
