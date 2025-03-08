@@ -5,10 +5,10 @@ import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 
 export default [
-  js.configs.recommended,  // ✅ JavaScript recommended rules
-  tseslint.configs.recommended,  // ✅ TypeScript recommended rules
-  react.configs.recommended, // ✅ React recommended rules
-  reactHooks.configs.recommended, // ✅ React Hooks recommended rules
+  js.configs.recommended,
+  tseslint.configs.recommended,
+  react.configs.recommended,
+  reactHooks.configs.recommended,
   {
     languageOptions: {
       ecmaVersion: "latest",
@@ -21,8 +21,8 @@ export default [
       "react-hooks": reactHooks,
     },
     rules: {
-      "react-hooks/rules-of-hooks": "error", // ✅ Ensures correct React Hook usage
-      "react-hooks/exhaustive-deps": "warn", // ✅ Warns about missing dependencies
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
       "@typescript-eslint/no-unused-vars": "off",
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
     },
