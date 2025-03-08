@@ -150,7 +150,21 @@ const projectsData = [
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [project, setProject] = useState<any | null>(null);
+  interface Project {
+    id: string;
+    title: string;
+    category: string;
+    tags: string[];
+    description: string;
+    challenge: string;
+    solution: string;
+    imageUrl: string;
+    images?: string[];
+    websiteUrl?: string;
+    type: string;
+  }
+
+  const [project, setProject] = useState<Project | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   
   useEffect(() => {

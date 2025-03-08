@@ -186,7 +186,7 @@ const Index = () => {
                 <Button variant="outline" icon={<ArrowRight />}>View all services</Button>
               </Link>
               <Link to="/packages">
-                <Button variant="default" icon={<Package className="w-4 h-4" />}>Explore our packages</Button>
+                <Button variant="primary" icon={<Package className="w-4 h-4" />}>Explore our packages</Button>
               </Link>
             </div>
           </div>

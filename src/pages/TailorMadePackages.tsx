@@ -28,46 +28,39 @@ const Packages = () => {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">
+      <main>
         {/* Hero Section */}
-        <section 
-          ref={heroRef}
-          className="pt-32 pb-24 md:pt-40 md:pb-32 bg-gradient-to-b from-primary/10 to-background/95 relative overflow-hidden"
-          style={{ backgroundSize: 'cover' }}
-        >
-          <div className="absolute inset-0 z-0 opacity-30">
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-background" />
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+        <section className="pt-32 pb-20 relative overflow-hidden">
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
           </div>
           
-          <div className="container mx-auto px-6 relative z-10">
-            <div className="max-w-4xl mx-auto">
-              <motion.div 
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto text-center appear-animate">
+              <motion.span 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6 }}
-                className="mb-4 flex justify-center"
+                className="inline-block py-1 px-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4 animation-delay-200"
               >
-                <Package className="text-primary h-12 w-12 mb-4" />
-              </motion.div>
+                Our Packages
+              </motion.span>
               
               <motion.h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ delay: 0.1 }}
+                className="text-4xl md:text-5xl font-bold tracking-tight mb-6 animation-delay-400"
               >
-                Find the perfect <span className="text-primary">package</span> for your needs
+                Find the perfect package<br className="hidden md:block" />for your needs
               </motion.h1>
               
               <motion.p 
-                className="text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-12"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                transition={{ delay: 0.2 }}
+                className="text-lg text-muted-foreground animation-delay-600"
               >
-                Choose from our carefully crafted packages designed to meet your specific requirements,
-                or let us create a custom solution just for you.
+                Choose from our carefully crafted packages designed to meet your specific requirements, or let us create a custom solution just for you.
               </motion.p>
             </div>
           </div>
