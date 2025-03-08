@@ -1,6 +1,5 @@
 
-import { ArrowUpRight } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 interface ServiceCardProps {
@@ -66,20 +65,7 @@ const ServiceCard = ({ title, description, icon, delay = 0, link = "#" }: Servic
         
         <h3 className="text-xl font-semibold mb-3 group-hover:text-[#8B5CF6] transition-colors duration-300">{title}</h3>
         
-        <p className="text-muted-foreground group-hover:text-foreground text-sm mb-6 flex-grow transition-colors duration-300">{description}</p>
-        
-        <motion.a 
-          href={link} 
-          onClick={handleClick}
-          className="flex items-center text-sm font-medium mt-auto group/link"
-          whileHover={{ x: 3 }}
-        >
-          <span className="relative inline-block overflow-hidden">
-            <span className="text-foreground group-hover:text-[#8B5CF6] transition-colors duration-300">Learn more</span>
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#8B5CF6] transform scale-x-0 origin-left transition-transform duration-300 group-hover/link:scale-x-100"></span>
-          </span>
-          <ArrowUpRight className="ml-1 w-4 h-4 text-[#8B5CF6] transition-transform duration-300 group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
-        </motion.a>
+        <p className="text-muted-foreground group-hover:text-foreground text-sm flex-grow transition-colors duration-300">{description}</p>
       </div>
     </motion.div>
   );

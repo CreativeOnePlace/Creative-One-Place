@@ -1,5 +1,7 @@
+
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PreFooter from "@/components/layout/PreFooter";
@@ -86,6 +88,7 @@ const Work = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [filteredProjects, setFilteredProjects] = useState<Project[]>(projectsData);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -102,6 +105,10 @@ const Work = () => {
       setIsLoading(false);
     }, 300);
   }, [activeCategory]);
+
+  const handleProjectClick = (projectId: string) => {
+    navigate(`/work/${projectId}`);
+  };
   
   return (
     <div className="min-h-screen">
@@ -178,6 +185,7 @@ const Work = () => {
                   transition={{ duration: 0.4, delay: isLoading ? 0 : index * 0.1 }}
                   layoutId={project.id}
                   className="group cursor-pointer"
+                  onClick={() => handleProjectClick(project.id)}
                 >
                   <div className="relative aspect-square rounded-xl overflow-hidden mb-4">
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-end p-6">
