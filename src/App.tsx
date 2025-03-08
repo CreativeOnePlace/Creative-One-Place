@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import ProjectIdea from "./pages/ProjectIdea";
 import NotFound from "./pages/NotFound";
 import ContactFAB from "./components/shared/ContactFAB";
+import TailorMadePackages from "./pages/TailorMadePackages";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/project-idea" element={<ProjectIdea />} />
+          <Route path="/packages" element={<TailorMadePackages />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
