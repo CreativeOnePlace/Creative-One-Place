@@ -109,11 +109,14 @@ const Navbar = () => {
           <DarkModeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-foreground hover:text-[#8B5CF6] transition-colors"
+            className="text-foreground hover:text-[#8B5CF6] transition-colors relative z-50"
             aria-label="Toggle menu"
           >
-            <Menu className={`w-6 h-6 transition-opacity ${isOpen ? "opacity-0" : "opacity-100"}`} />
-            <X className={`w-6 h-6 absolute transition-opacity ${isOpen ? "opacity-100" : "opacity-0"}`} />
+            {isOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
       </div>

@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Phone, X } from "lucide-react";
+import { MessageSquare, Phone, X } from "lucide-react";
 
 const ContactFAB = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +35,7 @@ const ContactFAB = () => {
               whileHover={{ scale: 1.1 }}
               className="absolute bottom-0 right-0 flex items-center justify-center w-12 h-12 rounded-full bg-green-500 text-white shadow-lg"
             >
-              <MessageCircle size={20} />
+              <MessageSquare size={20} />
             </motion.a>
             
             {/* Call Button */}
@@ -64,7 +64,7 @@ const ContactFAB = () => {
           : "bg-gradient-to-r from-[#8B5CF6] to-[#D946EF]"
         } text-white transition-colors duration-300`}
       >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
+        {isOpen ? <X size={24} /> : <MessageSquare size={24} />}
       </motion.button>
     </div>
   );
