@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { BarChart, PenTool, Globe, MessageCircle, ArrowRight, CheckCircle } from "lucide-react";
+import { BarChart, PenTool, Globe, MessageCircle, ArrowRight, CheckCircle, Package } from "lucide-react";
 import Hero from "@/components/home/Hero";
 import HorizontalScroll from "@/components/home/HorizontalScroll";
 import AutoSlider from "@/components/home/AutoSlider";
@@ -181,9 +181,12 @@ const Index = () => {
               ))}
             </div>
             
-            <div className="mt-12 text-center">
+            <div className="mt-12 text-center flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/services">
                 <Button variant="outline" icon={<ArrowRight />}>View all services</Button>
+              </Link>
+              <Link to="/packages">
+                <Button variant="default" icon={<Package className="w-4 h-4" />}>Explore our packages</Button>
               </Link>
             </div>
           </div>

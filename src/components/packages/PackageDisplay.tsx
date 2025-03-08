@@ -13,24 +13,30 @@ const PackageDisplay = ({ category }: PackageDisplayProps) => {
   const filteredPackages = packages.filter(pkg => pkg.category === category);
   
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <AnimatePresence mode="wait">
-        {filteredPackages.map((pkg) => (
+    <AnimatePresence mode="wait">
+      <motion.div 
+        key={category}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 lg:gap-8"
+      >
+        {filteredPackages.map((pkg, index) => (
           <motion.div
             key={pkg.id}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
             className={cn(
-              "relative p-6 rounded-xl border backdrop-blur-sm",
+              "relative p-6 rounded-xl border backdrop-blur-sm group hover:shadow-lg transition-all duration-300",
               pkg.popular
                 ? "border-primary/40 bg-primary/5"
                 : "border-border bg-card/40"
             )}
           >
             {pkg.popular && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-4 py-1 rounded-full shadow-md">
                 Most Popular
               </div>
             )}
@@ -39,14 +45,17 @@ const PackageDisplay = ({ category }: PackageDisplayProps) => {
               <img 
                 src={pkg.image || "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"} 
                 alt={pkg.title} 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
               />
             </div>
             
             <h3 className="text-xl font-semibold mb-2">{pkg.title}</h3>
             <p className="text-muted-foreground mb-4 text-sm">{pkg.description}</p>
             
-            <div className="text-2xl font-bold mb-6">{pkg.price}</div>
+            <div className="text-2xl font-bold mb-6 flex items-baseline">
+              {pkg.price}
+              <span className="text-sm text-muted-foreground ml-1">/project</span>
+            </div>
             
             <ul className="space-y-3 mb-8">
               {pkg.features.map((feature, index) => (
@@ -63,9 +72,9 @@ const PackageDisplay = ({ category }: PackageDisplayProps) => {
               ))}
             </ul>
             
-            <a href="/contact" className="block w-full">
+            <a href="/contact" className="block w-full mt-auto">
               <button className={cn(
-                "w-full py-2 rounded-md transition-colors",
+                "w-full py-3 rounded-md transition-all duration-300 transform group-hover:translate-y-[-2px]",
                 pkg.popular
                   ? "bg-primary text-white hover:bg-primary/90"
                   : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
@@ -75,8 +84,8 @@ const PackageDisplay = ({ category }: PackageDisplayProps) => {
             </a>
           </motion.div>
         ))}
-      </AnimatePresence>
-    </div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
