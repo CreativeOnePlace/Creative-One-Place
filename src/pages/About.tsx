@@ -7,33 +7,6 @@ import { ArrowUpRight } from "lucide-react";
 import Button from "@/components/shared/Button";
 
 const About = () => {
-  const teamMembers = [
-    {
-      name: "Sarah Johnson",
-      role: "Creative Director",
-      bio: "Over 10 years of experience in branding and visual design, leading creative teams to deliver exceptional results.",
-      imageUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-      name: "Michael Chen",
-      role: "Web Developer",
-      bio: "Frontend specialist with expertise in creating responsive, user-friendly websites that deliver on both form and function.",
-      imageUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-      name: "Alex Patel",
-      role: "Digital Marketing Manager",
-      bio: "Experienced in creating effective social media strategies and campaigns that increase brand visibility and engagement.",
-      imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-      name: "David Rodriguez",
-      role: "UI/UX Designer",
-      bio: "Passionate about creating intuitive user experiences that help businesses connect with their audience.",
-      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"
-    },
-  ];
-
   const contentContainer = {
     hidden: { opacity: 0 },
     show: {
@@ -105,7 +78,7 @@ const About = () => {
           </motion.div>
         </section>
 
-        {/* Team section */}
+        {/* About Us section - Replacing Team section */}
         <section className="bg-secondary/30 py-16 md:py-24">
           <div className="container mx-auto px-6">
             <motion.div 
@@ -114,38 +87,57 @@ const About = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-semibold mb-4">Meet Our Team</h2>
+              <h2 className="text-3xl md:text-4xl font-semibold mb-4">About Us</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Our diverse team brings together expertise in design, development, and marketing to create holistic solutions for our clients.
+                A passionate team of designers, developers, and marketers dedicated to bringing brands to life.
               </p>
             </motion.div>
             
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
               variants={contentContainer}
               initial="hidden"
               animate="show"
             >
-              {teamMembers.map((member, index) => (
-                <motion.div 
-                  key={member.name} 
-                  className="bg-card rounded-xl overflow-hidden"
-                  variants={contentItem}
-                >
-                  <div className="aspect-[3/4] overflow-hidden">
-                    <img 
-                      src={member.imageUrl} 
-                      alt={member.name} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-medium">{member.name}</h3>
-                    <p className="text-primary mb-2">{member.role}</p>
-                    <p className="text-sm text-muted-foreground">{member.bio}</p>
-                  </div>
-                </motion.div>
-              ))}
+              <motion.div 
+                className="p-6 border border-border rounded-xl bg-card/50"
+                variants={contentItem}
+              >
+                <h3 className="text-xl font-medium mb-3">Our Story</h3>
+                <p className="text-muted-foreground">
+                  Founded in 2014, Creative One Place began with a simple idea: to create a design studio where creativity, strategy, and technology converge to deliver exceptional brand experiences. What started as a small team of passionate designers has grown into a full-service creative agency with a global client base.
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                className="p-6 border border-border rounded-xl bg-card/50"
+                variants={contentItem}
+              >
+                <h3 className="text-xl font-medium mb-3">Our Approach</h3>
+                <p className="text-muted-foreground">
+                  We believe in a collaborative process that begins with understanding your business goals and audience needs. Our design thinking approach ensures that every solution we create is not only visually stunning but also strategically sound and built to drive results.
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                className="p-6 border border-border rounded-xl bg-card/50"
+                variants={contentItem}
+              >
+                <h3 className="text-xl font-medium mb-3">Our Expertise</h3>
+                <p className="text-muted-foreground">
+                  With expertise spanning brand identity, web design, digital marketing, and content creation, our team brings diverse skills and perspectives to every project. We're constantly evolving, staying ahead of industry trends to deliver innovative solutions.
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                className="p-6 border border-border rounded-xl bg-card/50"
+                variants={contentItem}
+              >
+                <h3 className="text-xl font-medium mb-3">Our Promise</h3>
+                <p className="text-muted-foreground">
+                  We're committed to delivering exceptional work that exceeds expectations. Our success is measured by your success, and we're proud to have helped hundreds of clients achieve their goals through strategic design and marketing solutions.
+                </p>
+              </motion.div>
             </motion.div>
           </div>
         </section>

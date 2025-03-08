@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -204,7 +205,7 @@ const Index = () => {
           ))}
         </HorizontalScroll>
         
-        {/* Stats Section */}
+        {/* Stats Section - With Added Animations */}
         <section className="py-20">
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
@@ -217,8 +218,29 @@ const Index = () => {
                   transition={{ delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2">{stat.count}</p>
-                  <p className="text-muted-foreground">{stat.label}</p>
+                  <motion.p 
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 100, 
+                      delay: index * 0.2,
+                      duration: 0.8 
+                    }}
+                    className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2"
+                  >
+                    {stat.count}
+                  </motion.p>
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.2 + 0.4, duration: 0.6 }}
+                    className="text-muted-foreground"
+                  >
+                    {stat.label}
+                  </motion.p>
                 </motion.div>
               ))}
             </div>
