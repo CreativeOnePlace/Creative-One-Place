@@ -24,7 +24,7 @@ const PackageSelector = ({ selectedCategory, setSelectedCategory }: PackageSelec
             onClick={() => setSelectedCategory(category.id)}
             className={`relative px-6 py-4 rounded-xl text-sm md:text-base font-medium transition-all duration-300 flex items-center gap-3 ${
               selectedCategory === category.id
-                ? "text-white shadow-lg"
+                ? "text-primary-foreground shadow-lg"
                 : "text-foreground/80 hover:text-foreground hover:bg-card/40"
             }`}
           >
