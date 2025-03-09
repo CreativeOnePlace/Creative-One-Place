@@ -101,7 +101,7 @@ const Packages = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <a href="/project-idea" className="inline-block">
-                    <button className="bg-primary text-primary-foreground px-10 py-4 rounded-lg font-medium shadow-lg hover:shadow-primary/25 hover:bg-primary/90 transition-all duration-300 flex items-center gap-3 group">
+                    <button className="bg-primary text-primary-foreground px-10 py-4 rounded-lg font-medium shadow-lg hover:shadow-primary/25 hover:bg-primary/90 transition-all duration-200 flex items-center gap-3 group">
                       Request Custom Package
                       <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-2 duration-300" />
                     </button>
