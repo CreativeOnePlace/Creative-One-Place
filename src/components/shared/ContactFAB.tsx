@@ -29,8 +29,8 @@ const ContactFAB = () => {
               href="https://wa.me/+15551234567" // Replace with your WhatsApp number
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20, scale: 0.8 }}
-              animate={{ opacity: 1, y: -100, scale: 1 }}
+              initial={{ opacity: 0, y: -65, scale: 0.8 }}
+              animate={{ opacity: 1, y: -120, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.8 }}
               whileHover={{ scale: 1.1 }}
               className="absolute bottom-0 right-0 flex items-center justify-center w-12 h-12 rounded-full bg-green-500 text-white shadow-lg"
@@ -42,8 +42,8 @@ const ContactFAB = () => {
             <motion.a
               href="tel:+15551234567" // Replace with your phone number
               initial={{ opacity: 0, y: 20, scale: 0.8 }}
-              animate={{ opacity: 1, y: -50, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.8 }}
+              animate={{ opacity: 1, y: -65, scale: 1 }}
+              exit={{ opacity: 0, y: 50, scale: 0.8 }}
               whileHover={{ scale: 1.1 }}
               className="absolute bottom-0 right-0 flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white shadow-lg"
             >

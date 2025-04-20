@@ -10,45 +10,45 @@ import PreFooter from "@/components/layout/PreFooter";
 const projectsData = [
   {
     id: "brand-identity-1",
-    title: "Elegant Rebrand",
-    category: "Brand Identity",
+    title: "Pahan Lanka",
+    category: "Graphic Design and Social Media",
     tags: ["logo", "identity", "branding"],
-    imageUrl: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "../public/images/our-works/pahan-lanka/image-2.png"
   },
   {
     id: "web-design-1",
-    title: "Corporate Website",
+    title: "Bride Zone",
     category: "Web Design",
     tags: ["web", "ui", "responsive"],
-    imageUrl: "https://images.unsplash.com/photo-1523800378286-dae1f0dae656?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "../public/images/our-works/bride-zone/bride-zone.png"
   },
   {
     id: "social-media-1",
-    title: "Campaign Strategy",
-    category: "Social Media",
+    title: "Yugathra Movie",
+    category: "Graphic Design and Social Media",
     tags: ["strategy", "social", "campaign"],
-    imageUrl: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "../public/images/our-works/yugathra/image-2.png"
   },
   {
     id: "graphic-design-1",
-    title: "Product Packaging",
-    category: "Graphic Design",
+    title: "Samagi",
+    category: "Graphic Design and Social Media",
     tags: ["packaging", "print", "design"],
-    imageUrl: "https://images.unsplash.com/photo-1585435557343-3b092031a831?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "brand-identity-2",
-    title: "Modern Identity",
-    category: "Brand Identity",
-    tags: ["logo", "identity", "branding"],
-    imageUrl: "https://images.unsplash.com/photo-1603145733146-ae562a55031e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "../public/images/our-works/samagi/image.png"
   },
   {
     id: "web-design-2",
-    title: "E-commerce Platform",
+    title: "Best Driver in Sri Lanka",
+    category: "Web Design",
+    tags: ["logo", "identity", "branding", "web design"],
+    imageUrl: "../public/images/our-works/best-driver-in-sri-lanka/best-driver-in-sri-lanka.png"
+  },
+  {
+    id: "web-design-3",
+    title: "Samagi Website",
     category: "Web Design",
     tags: ["web", "ui", "ecommerce"],
-    imageUrl: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "../public/images/our-works/samagi-web/samagi-web.png"
   },
   {
     id: "marketing-1",
