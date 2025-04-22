@@ -50,13 +50,13 @@ const Contact = () => {
     {
       icon: <Phone className="w-5 h-5 text-primary" />,
       title: "Phone",
-      contact: "+1 (555) 123-4567",
-      link: "tel:+15551234567"
+      contact: "+94 78 836 2998",
+      link: "tel:+94788362998"  
     },
     {
       icon: <MapPin className="w-5 h-5 text-primary" />,
       title: "Address",
-      contact: "123 Design Street, Creative City",
+      contact: "Creative One Place, Galle Road, Colombo",
       link: "https://maps.google.com"
     }
   ];

@@ -347,7 +347,7 @@ const ProjectIdea = () => {
                             type="tel"
                             value={contactInfo.phone}
                             onChange={(e) => updateContactInfo("phone", e.target.value)}
-                            placeholder="+1 (555) 123-4567"
+                            placeholder="+94 78 836 2998"
                             required={selectedContactMethods.includes("phone")}
                           />
                         </div>
@@ -364,7 +364,7 @@ const ProjectIdea = () => {
                             type="tel"
                             value={contactInfo.whatsapp}
                             onChange={(e) => updateContactInfo("whatsapp", e.target.value)}
-                            placeholder="+1 (555) 123-4567"
+                            placeholder="+94 78 836 2998"
                             required={selectedContactMethods.includes("whatsapp")}
                           />
                         </div>

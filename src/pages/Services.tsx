@@ -7,6 +7,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PreFooter from "@/components/layout/PreFooter";
 import ServiceCard from "@/components/shared/ServiceCard";
+import { useNavigate } from "react-router-dom";
 
 const servicesData = [
   {
@@ -100,6 +101,7 @@ const processSteps = [
 ];
 
 const Services = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -217,7 +219,7 @@ const Services = () => {
                       ))}
                     </div>
                     
-                    <Button variant="outline" icon={<ArrowUpRight />}>
+                    <Button variant="outline" icon={<ArrowUpRight />} onClick={() => navigate("/packages")}>
                       Learn more
                     </Button>
                   </motion.div>

@@ -11,7 +11,7 @@ const projectsData = [
   {
     id: "brand-identity-1",
     title: "Pahan Lanka",
-    category: "Graphic Design and Social Media",
+    category: "Social Media",
     tags: ["logo", "identity", "branding"],
     imageUrl: "../public/images/our-works/pahan-lanka/image-2.png"
   },
@@ -25,14 +25,14 @@ const projectsData = [
   {
     id: "social-media-1",
     title: "Yugathra Movie",
-    category: "Graphic Design and Social Media",
+    category: "Social Media",
     tags: ["strategy", "social", "campaign"],
     imageUrl: "../public/images/our-works/yugathra/image-2.png"
   },
   {
     id: "graphic-design-1",
     title: "Samagi",
-    category: "Graphic Design and Social Media",
+    category: "Social Media",
     tags: ["packaging", "print", "design"],
     imageUrl: "../public/images/our-works/samagi/image.png"
   },
@@ -52,34 +52,32 @@ const projectsData = [
   },
   {
     id: "marketing-1",
-    title: "Digital Marketing Campaign",
-    category: "Marketing",
+    title: "Bambara Wasanthe - Movie",
+    category: "Social Media",
     tags: ["digital", "campaign", "marketing"],
-    imageUrl: "https://images.unsplash.com/photo-1550305080-4e029753abcf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "../public/images/our-works/bambarawasanthe/image.png"
   },
   {
     id: "social-media-2",
-    title: "Influencer Partnership",
+    title: "Channa Perera Acting Academy",
     category: "Social Media",
     tags: ["influencer", "social", "collaboration"],
-    imageUrl: "https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "../public/images/our-works/channa-perera-academy/image.png"
   },
   {
     id: "graphic-design-2",
-    title: "Annual Report Design",
+    title: "Prime Stock",
     category: "Graphic Design",
     tags: ["print", "design", "editorial"],
-    imageUrl: "https://images.unsplash.com/photo-1596638787647-904d822d751e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "../public/images/our-works/prime-stock/image.png"
   }
 ];
 
 const categories = [
   "All",
-  "Brand Identity",
-  "Web Design",
-  "Graphic Design",
   "Social Media",
-  "Marketing"
+  "Web Design",
+  "Graphic Design"
 ];
 
 type Project = typeof projectsData[0];

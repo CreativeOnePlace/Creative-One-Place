@@ -16,39 +16,66 @@ import PreFooter from "@/components/layout/PreFooter";
 const projects = [
   {
     id: "brand-identity-1",
-    title: "Elegant Rebrand",
-    category: "Brand Identity",
-    imageUrl: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    title: "Pahan Lanka",
+    category: "Social Media",
+    tags: ["logo", "identity", "branding"],
+    imageUrl: "../public/images/our-works/pahan-lanka/image-2.png"
   },
   {
     id: "web-design-1",
-    title: "Corporate Website",
+    title: "Bride Zone",
     category: "Web Design",
-    imageUrl: "https://images.unsplash.com/photo-1523800378286-dae1f0dae656?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    tags: ["web", "ui", "responsive"],
+    imageUrl: "../public/images/our-works/bride-zone/bride-zone.png"
   },
   {
     id: "social-media-1",
-    title: "Campaign Strategy",
+    title: "Yugathra Movie",
     category: "Social Media",
-    imageUrl: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    tags: ["strategy", "social", "campaign"],
+    imageUrl: "../public/images/our-works/yugathra/image-2.png"
   },
   {
     id: "graphic-design-1",
-    title: "Product Packaging",
-    category: "Graphic Design",
-    imageUrl: "https://images.unsplash.com/photo-1585435557343-3b092031a831?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "brand-identity-2",
-    title: "Modern Identity",
-    category: "Brand Identity",
-    imageUrl: "https://images.unsplash.com/photo-1603145733146-ae562a55031e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    title: "Samagi",
+    category: "Social Media",
+    tags: ["packaging", "print", "design"],
+    imageUrl: "../public/images/our-works/samagi/image.png"
   },
   {
     id: "web-design-2",
-    title: "E-commerce Platform",
+    title: "Best Driver in Sri Lanka",
     category: "Web Design",
-    imageUrl: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    tags: ["logo", "identity", "branding", "web design"],
+    imageUrl: "../public/images/our-works/best-driver-in-sri-lanka/best-driver-in-sri-lanka.png"
+  },
+  {
+    id: "web-design-3",
+    title: "Samagi Website",
+    category: "Web Design",
+    tags: ["web", "ui", "ecommerce"],
+    imageUrl: "../public/images/our-works/samagi-web/samagi-web.png"
+  },
+  {
+    id: "marketing-1",
+    title: "Bambara Wasanthe - Movie",
+    category: "Social Media",
+    tags: ["digital", "campaign", "marketing"],
+    imageUrl: "../public/images/our-works/bambarawasanthe/image.png"
+  },
+  {
+    id: "social-media-2",
+    title: "Channa Perera Acting Academy",
+    category: "Social Media",
+    tags: ["influencer", "social", "collaboration"],
+    imageUrl: "../public/images/our-works/channa-perera-academy/image.png"
+  },
+  {
+    id: "graphic-design-2",
+    title: "Prime Stock",
+    category: "Graphic Design",
+    tags: ["print", "design", "editorial"],
+    imageUrl: "../public/images/our-works/prime-stock/image.png"
   }
 ];
 
@@ -106,8 +133,7 @@ const services = [
 const stats = [
   { count: "100+", label: "Happy Clients" },
   { count: "250+", label: "Projects Completed" },
-  { count: "10+", label: "Years Experience" },
-  { count: "15", label: "Industry Awards" }
+  { count: "5+", label: "Years Experience" },
 ];
 
 // Sample benefits
@@ -222,7 +248,7 @@ const Index = () => {
 
         {/* Projects Showcase */}
         <HorizontalScroll
-          title="Our Work"
+          title="Our Works"
           subtitle="Explore our latest projects and see how we've helped brands transform their digital presence."
         >
           {projects.map((project) => (
@@ -239,7 +265,7 @@ const Index = () => {
         {/* Stats Section - With Added Animations */}
         <section className="py-20">
           <div className="container mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}

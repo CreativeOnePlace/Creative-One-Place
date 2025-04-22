@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Instagram, Twitter, Linkedin, Facebook, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { Instagram, Twitter, Linkedin, Facebook, ArrowUpRight, Mail, MapPin, Phone, XIcon } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -29,21 +29,20 @@ const Footer = () => {
     },
     { 
       icon: <Phone className="w-4 h-4" />, 
-      text: "+1 (555) 123-4567",
-      href: "tel:+15551234567"  
+      text: "+94 78 836 2998",
+      href: "tel:+94788362998"  
     },
     { 
       icon: <MapPin className="w-4 h-4" />, 
-      text: "123 Design Street, Creative City",
+      text: "Creative One Place, Galle Road, Colombo",
       href: "https://maps.google.com"
     }
   ];
   
   const social = [
-    { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com" },
-    { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com" },
-    { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com" },
-    { icon: <Facebook className="w-5 h-5" />, href: "https://facebook.com" },
+    { icon: <Instagram className="w-5 h-5" />, href: "https://www.instagram.com/creative_one_place/" },
+    { icon: <XIcon className="w-5 h-5" />, href: "https://x.com/CreativeOPlace" },
+    { icon: <Facebook className="w-5 h-5" />, href: "https://www.facebook.com/creative.one.place.official" },
   ];
   
   // Track mouse position for the footer spotlight effect

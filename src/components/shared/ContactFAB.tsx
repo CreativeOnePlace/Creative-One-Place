@@ -26,7 +26,7 @@ const ContactFAB = () => {
             
             {/* WhatsApp Button */}
             <motion.a
-              href="https://wa.me/+15551234567" // Replace with your WhatsApp number
+              href="https://wa.me/+94788362998" 
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: -65, scale: 0.8 }}
@@ -40,7 +40,7 @@ const ContactFAB = () => {
             
             {/* Call Button */}
             <motion.a
-              href="tel:+15551234567" // Replace with your phone number
+              href="tel:+94788362998" // Replace with your phone number
               initial={{ opacity: 0, y: 20, scale: 0.8 }}
               animate={{ opacity: 1, y: -65, scale: 1 }}
               exit={{ opacity: 0, y: 50, scale: 0.8 }}

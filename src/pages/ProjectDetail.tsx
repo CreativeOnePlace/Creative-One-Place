@@ -8,7 +8,6 @@ import Footer from "@/components/layout/Footer";
 import PreFooter from "@/components/layout/PreFooter";
 import Button from "@/components/shared/Button";
 
-// Sample projects data (same as in Work.tsx)
 const projectsData = [
   {
     id: "brand-identity-1",
@@ -105,49 +104,49 @@ const projectsData = [
   },
   {
     id: "marketing-1",
-    title: "Digital Marketing Campaign",
+    title: "Bambara Wasanthe - Movie",
     category: "Marketing",
-    tags: ["digital", "campaign", "marketing"],
-    description: "A strategic digital marketing campaign designed to increase brand awareness and generate qualified leads.",
-    challenge: "The client needed to increase their online visibility and generate more leads through digital channels.",
-    solution: "We developed and implemented a comprehensive digital marketing strategy across multiple channels to reach the target audience.",
-    imageUrl: "https://images.unsplash.com/photo-1550305080-4e029753abcf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    tags: ["digital", "campaign", "marketing", "movie"],
+    description: "A visually-driven promotional campaign combining motion graphics, creative content, and digital marketing for the film 'Bambara Wasanthe.'",
+    challenge: "The film Bambara Wasanthe needed a compelling digital presence to captivate audiences and build excitement leading up to its release..",
+    solution: "We crafted an engaging digital marketing campaign for Bambara Wasanthe, featuring eye-catching motion videos and vibrant social media posts tailored to resonate with the Sri Lankan film audience. From teaser animations to behind-the-scenes visuals, each asset was designed to elevate the film’s appeal and create buzz online. The campaign was strategically rolled out across major platforms to drive anticipation, increase audience interaction, and establish a strong online following for the movie.",
+    imageUrl: "../public/images/our-works/bambarawasanthe/image-3.png",
     images: [
-      "https://images.unsplash.com/photo-1550305080-4e029753abcf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1533750516457-a7f992034fec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+      "../public/images/our-works/bambarawasanthe/image-3.png",
+      "../public/images/our-works/bambarawasanthe/image-2.png",
+      "../public/images/our-works/bambarawasanthe/image.png",
+      "../public/images/our-works/bambarawasanthe/image-1.png",
     ],
     type: "image"
   },
   {
     id: "social-media-2",
-    title: "Influencer Partnership",
+    title: "Channa Perera Acting Academy",
     category: "Social Media",
-    tags: ["influencer", "social", "collaboration"],
-    description: "A collaborative campaign with influencers designed to expand reach and build credibility with target audiences.",
-    challenge: "The client wanted to leverage influencer marketing to reach new audiences and build credibility in their industry.",
-    solution: "We identified and partnered with relevant influencers to create authentic content that resonated with the target audience.",
-    imageUrl: "https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    tags: ["influencer", "social", "marketing", "acting academy"],
+    description: "A digital branding and promotional project for a premier acting academy founded by renowned Sri Lankan actor and director, Channa Perera.",
+    challenge: "The academy, led by one of Sri Lanka’s most respected names in cinema, needed a strong online identity to attract aspiring actors and promote their professional training programs.",
+    solution: "We developed a complete digital presence for the Channa Perera Acting Academy, including branding, social media content, and promotional visuals. The campaign focused on highlighting the credibility of the founder, showcasing past student successes, and promoting enrollment for upcoming acting workshops. Through striking visual content and carefully crafted messaging, we built an engaging online community around the academy, helping it reach a broader audience of young talents across Sri Lanka.",
+    imageUrl: "../public/images/our-works/channa-perera-academy/image-2.png",
     images: [
-      "https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f8e7a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+      "../public/images/our-works/channa-perera-academy/image-2.png",
+      "../public/images/our-works/channa-perera-academy/image.png",
+      "../public/images/our-works/channa-perera-academy/image-1.png",
     ],
     type: "image"
   },
   {
     id: "graphic-design-2",
-    title: "Annual Report Design",
+    title: "Prime Stock",
     category: "Graphic Design",
-    tags: ["print", "design", "editorial"],
-    description: "A visually compelling annual report designed to effectively communicate company achievements and financial information.",
-    challenge: "The client needed to present complex financial information in an engaging and accessible format.",
-    solution: "We designed a visually engaging annual report that presents complex information in a clear and compelling way.",
-    imageUrl: "https://images.unsplash.com/photo-1596638787647-904d822d751e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    tags: ["post-design", "design", "editorial", "social media boosting", "social media"],
+    description: "A lifestyle product branding and social media campaign for a retail brand offering stylish everyday essentials.",
+    challenge: "Prime Stock, a growing retail brand selling items such as watches, towel racks, and combs, needed an engaging digital presence to improve brand visibility and drive product sales.",
+    solution: "We handled the complete visual and promotional strategy for Prime Stock, focusing on high-quality graphic design and strategic social media boosting. From sleek product visuals to themed promotional posts, every design was tailored to match the brand’s aesthetic and appeal to a modern audience. We also ran targeted ad campaigns to enhance product reach and increase conversions, helping Prime Stock build a recognizable presence in the lifestyle product market.",
+    imageUrl: "../public/images/our-works/prime-stock/image.png",
     images: [
-      "https://images.unsplash.com/photo-1596638787647-904d822d751e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1569017388730-020b5f80a004?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1591291621164-2c6367723315?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+      "../public/images/our-works/prime-stock/image.png",
+      "../public/images/our-works/prime-stock/image-1.png",
     ],
     type: "image"
   }

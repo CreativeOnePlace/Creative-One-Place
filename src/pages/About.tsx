@@ -105,7 +105,7 @@ const About = () => {
               >
                 <h3 className="text-xl font-medium mb-3">Our Story</h3>
                 <p className="text-muted-foreground">
-                  Founded in 2014, Creative One Place began with a simple idea: to create a design studio where creativity, strategy, and technology converge to deliver exceptional brand experiences. What started as a small team of passionate designers has grown into a full-service creative agency with a global client base.
+                  Founded in 2020, Creative One Place began with a simple idea: to create a design studio where creativity, strategy, and technology converge to deliver exceptional brand experiences. What started as a small team of passionate designers has grown into a full-service creative agency with a global client base.
                 </p>
               </motion.div>
               

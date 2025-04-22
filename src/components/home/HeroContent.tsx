@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Button from "../shared/Button";
 import { ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface HeroContentProps {
   animatedText: string[];
@@ -9,6 +10,7 @@ interface HeroContentProps {
 }
 
 const HeroContent = ({ animatedText, fullText }: HeroContentProps) => {
+  const navigate = useNavigate();
   return (
     <div className="container mx-auto px-6">
       <div className="max-w-4xl mx-auto text-center space-y-8 appear-animate">
@@ -27,10 +29,12 @@ const HeroContent = ({ animatedText, fullText }: HeroContentProps) => {
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animation-delay-800 animate-fade-in opacity-0" style={{ animationDelay: "0.8s" }}>
-          <Button size="lg" className="bg-[#8B5CF6] hover:bg-[#7C3AED] transition-colors gradient-border" icon={<ChevronRight />}>
+          <Button size="lg" className="bg-[#8B5CF6] hover:bg-[#7C3AED] transition-colors gradient-border" icon={<ChevronRight />}
+          onClick={() => navigate("/work")}>
             Explore our work
           </Button>
-          <Button variant="outline" size="lg" className="border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6]/10 transition-colors gradient-border">
+          <Button variant="outline" size="lg" className="border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6]/10 transition-colors gradient-border"
+          onClick={() => navigate("/services")}>
             Our services
           </Button>
         </div>

@@ -1,4 +1,3 @@
-
 import { useRef, useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -6,14 +5,22 @@ interface HorizontalScrollProps {
   title: string;
   subtitle?: string;
   children: React.ReactNode;
+  scrollSpeed?: number; // pixels per second
 }
 
-const HorizontalScroll = ({ title, subtitle, children }: HorizontalScrollProps) => {
+const HorizontalScroll = ({ 
+  title, 
+  subtitle, 
+  children,
+  scrollSpeed = 50 // default scroll speed
+}: HorizontalScrollProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
   const [mouseX, setMouseX] = useState(0);
+  const animationFrameRef = useRef<number>();
+  const lastTimeRef = useRef<number>();
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
@@ -21,6 +28,25 @@ const HorizontalScroll = ({ title, subtitle, children }: HorizontalScrollProps) 
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
     setCanScrollLeft(scrollLeft > 0);
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+
+    // Reset scroll position when reaching the end for infinite effect
+    if (scrollLeft >= scrollWidth - clientWidth - 1) {
+      scrollRef.current.scrollLeft = 0;
+    }
+  };
+
+  // Auto-scroll animation
+  const animate = (timestamp: number) => {
+    if (!lastTimeRef.current) lastTimeRef.current = timestamp;
+    const deltaTime = timestamp - lastTimeRef.current;
+    lastTimeRef.current = timestamp;
+
+    if (scrollRef.current && !isHovering) {
+      const scrollAmount = (scrollSpeed * deltaTime) / 1000; // Convert to pixels per frame
+      scrollRef.current.scrollLeft += scrollAmount;
+    }
+
+    animationFrameRef.current = requestAnimationFrame(animate);
   };
 
   useEffect(() => {
@@ -28,10 +54,19 @@ const HorizontalScroll = ({ title, subtitle, children }: HorizontalScrollProps) 
     if (scrollDiv) {
       scrollDiv.addEventListener("scroll", handleScroll);
       handleScroll();
-      return () => scrollDiv.removeEventListener("scroll", handleScroll);
+
+      // Start animation
+      animationFrameRef.current = requestAnimationFrame(animate);
+
+      return () => {
+        scrollDiv.removeEventListener("scroll", handleScroll);
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+      };
     }
-  }, []);
-  
+  }, [isHovering, scrollSpeed]);
+
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
     
@@ -54,6 +89,14 @@ const HorizontalScroll = ({ title, subtitle, children }: HorizontalScrollProps) 
     }
   };
 
+  // Clone children for infinite scroll effect
+  const clonedChildren = (
+    <>
+      {children}
+      {children}
+    </>
+  );
+
   return (
     <div className="py-20">
       <div className="container mx-auto px-6">
@@ -63,7 +106,7 @@ const HorizontalScroll = ({ title, subtitle, children }: HorizontalScrollProps) 
             {subtitle && <p className="text-lg text-muted-foreground max-w-2xl">{subtitle}</p>}
           </div>
           
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <button
               onClick={() => scroll("left")}
               disabled={!canScrollLeft}
@@ -88,12 +131,12 @@ const HorizontalScroll = ({ title, subtitle, children }: HorizontalScrollProps) 
             >
               <ArrowRight className="w-5 h-5" />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       
       <div 
-        className="relative" 
+        className="relative overflow-hidden" 
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
         onMouseMove={handleMouseMove}
@@ -108,7 +151,7 @@ const HorizontalScroll = ({ title, subtitle, children }: HorizontalScrollProps) 
           }}
         >
           <div className="pl-[max(1rem,calc((100vw-80rem)/2))]" />
-          {children}
+          {clonedChildren}
           <div className="pr-[max(1rem,calc((100vw-80rem)/2))]" />
         </div>
         
